@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="dist3.js"></script>
+   <body>
+   	  <h1>
+   	  	Distributed Node 3
+   	  </h1>
+   	  <form>
+   	  	<input type="text" id="topic">
+   	  	<button type="button" id="submit" class="btn btn-primary">Subscribe</button>
+        <div>
+         <input type="text" id="topic_publish">
+         <input type="text" id="message">
+         <button type="button" id="submit_message" class="btn btn-primary">Publish Message</button>
+      </div>
+
+   	  </form>
+   	  <div id='subscribed_topics'>
+   	  </div>
+   	  <div id="notifications">
+   	  </div>
+        <div id="published_topics">
+        </div>
+   	  <script>
+   	  	 let source = new EventSource("http://localhost:3012/notify/send_events")
+   	  	 source.onmessage = function(event){
+   	  	 	document.getElementById("notifications").innerHTML += "<b> Message: </b>" + JSON.parse(event.data).data + "<br>";
+   	  	 }
+   	  </script>
+   </body>
+</html>

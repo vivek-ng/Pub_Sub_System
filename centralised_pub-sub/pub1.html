@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="pub1.js"></script>
+   <body>
+   	  <h1>
+   	  	Subscriber 1
+   	  </h1>
+   	  <form>
+   	  	<input type="text" id="topic">
+   	  	<button type="button" id="submit" class="btn btn-primary">Submit</button>
+   	  </form>
+   	  <div id='subscribed_topics'>
+   	  </div>
+   	  <div id="notifications">
+   	  </div>
+   	  <script>
+   	  	 let source = new EventSource("http://localhost:3005/notify/notify_subscribers")
+   	  	 source.onmessage = function(event){
+   	  	 	document.getElementById("notifications").innerHTML += "<b> Message: </b>" + JSON.parse(event.data).data + "<br>";
+   	  	 }
+   	  </script>
+   </body>
+</html>
